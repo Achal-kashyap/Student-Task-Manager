@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Login Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 id="form-title">Welcome Back</h1>
+        <p id="form-subtitle">Enter your credentials to access your account</p>
+      </div>
+
+      <!-- Alert Banner -->
+      <div id="alert-box" class="alert hidden" role="alert"></div>
+
+      <form id="auth-form" novalidate>
+        <!-- Name Field (Visible only in Sign Up mode) -->
+        <div class="form-group hidden" id="name-group">
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" placeholder="Jane Doe" autocomplete="name" />
+          <small class="error-msg" id="name-error"></small>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required />
+          <small class="error-msg" id="email-error"></small>
+        </div>
+
+        <!-- Password Field with Show/Hide Toggle -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" id="toggle-password" class="toggle-btn" aria-label="Show password">
+              Show
+            </button>
+          </div>
+          <small class="error-msg" id="password-error"></small>
+        </div>
+
+        <!-- Options Row (Login Mode Only) -->
+        <div class="form-options" id="login-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember-me" />
+            <span>Remember me</span>
+          </label>
+          <a href="#" id="forgot-password" class="link">Forgot password?</a>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-primary">Sign In</button>
+      </form>
+
+      <div class="auth-footer">
+        <p id="toggle-text">
+          Don't have an account?
+          <button type="button" id="switch-mode-btn" class="link-btn">Sign Up</button>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
