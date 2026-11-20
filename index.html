@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Student Workspace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <span>Task<span class="purple">Flow</span></span>
+        </div>
+
+        <p class="menu-label">MENU</p>
+
+        <nav>
+            <a href="#" class="nav-link active">
+                <i class="fa-solid fa-grid-2"></i> Overview
+            </a>
+            <a href="#tasks" class="nav-link">
+                <i class="fa-solid fa-list-check"></i> My Tasks
+            </a>
+            <a href="#schedule" class="nav-link">
+                <i class="fa-regular fa-calendar"></i> Schedule
+            </a>
+            <a href="#progress" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i> Progress
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="upgrade-card">
+                <div class="upgrade-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Stay Productive!</h3>
+                <p>Small steps every day lead to big achievements.</p>
+                <button onclick="showToast('Keep going! You are doing great.')">Let's Go <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">A</div>
+                <div>
+                    <h4>Student</h4>
+                    <p>Free Account</p>
+                </div>
+                <i class="fa-solid fa-ellipsis"></i>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="mobile-logo">Task<span class="purple">Flow</span></div>
+            <div class="breadcrumb">Workspace <span>/</span> Overview</div>
+
+            <div class="top-actions">
+                <div class="date-display" id="currentDate"></div>
+                <button class="icon-btn" onclick="showToast('You are all caught up!')">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="avatar small">A</div>
+            </div>
+        </header>
+
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+                <h1>Good Morning, <span>Student!</span> 👋</h1>
+                <p class="welcome-text">Ready to make today productive? Let's get things done.</p>
+            </div>
+            <button class="primary-btn" onclick="openModal()">
+                <i class="fa-solid fa-plus"></i> Add New Task
+            </button>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Total Tasks</span>
+                    <div class="stat-icon purple-bg"><i class="fa-solid fa-layer-group"></i></div>
+                </div>
+                <h2 id="totalTasks">4</h2>
+                <p class="stat-note">All your academic tasks</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Completed</span>
+                    <div class="stat-icon green-bg"><i class="fa-solid fa-check"></i></div>
+                </div>
+                <h2 id="completedTasks">1</h2>
+                <p class="stat-note">Great work so far!</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Pending</span>
+                    <div class="stat-icon orange-bg"><i class="fa-regular fa-clock"></i></div>
+                </div>
+                <h2 id="pendingTasks">3</h2>
+                <p class="stat-note">Tasks waiting for you</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Progress</span>
+                    <div class="stat-icon blue-bg"><i class="fa-solid fa-chart-line"></i></div>
+                </div>
+                <h2 id="progressPercent">25%</h2>
+                <p class="stat-note">Overall completion rate</p>
+            </div>
+        </section>
+
+        <section class="content-grid">
+
+            <div class="task-panel" id="tasks">
+                <div class="section-heading">
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage your academic workload</p>
+                    </div>
+                    <button class="text-btn" onclick="openModal()">+ Add Task</button>
+                </div>
+
+                <div class="task-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Search tasks...">
+                    </div>
+                    <select id="filterSelect">
+                        <option value="all">All Tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="task-list" id="taskList"></div>
+            </div>
+
+            <div class="right-column">
+
+                <div class="progress-panel" id="progress">
+                    <div class="section-heading">
+                        <div>
+                            <h2>My Progress</h2>
+                            <p>Keep moving forward</p>
+                        </div>
+                        <i class="fa-solid fa-chart-simple purple"></i>
+                    </div>
+
+                    <div class="progress-circle" id="progressCircle">
+                        <div class="circle-inner">
+                            <h2 id="circlePercent">25%</h2>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-legend">
+                        <div><span class="dot purple-dot"></span> Completed <b id="legendCompleted">1</b></div>
+                        <div><span class="dot gray-dot"></span> Remaining <b id="legendPending">3</b></div>
+                    </div>
+                </div>
+
+                <div class="schedule-panel" id="schedule">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Study Goals</h2>
+                            <p>Your daily focus</p>
+                        </div>
+                        <i class="fa-solid fa-bullseye purple"></i>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-icon"><i class="fa-solid fa-book"></i></div>
+                        <div class="goal-info">
+                            <h4>Study for 2 hours</h4>
+                            <p>Daily learning goal</p>
+                        </div>
+                        <i class="fa-solid fa-circle-check goal-check"></i>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-icon orange-goal"><i class="fa-solid fa-code"></i></div>
+                        <div class="goal-info">
+                            <h4>Practice Coding</h4>
+                            <p>Improve your skills</p>
+                        </div>
+                        <i class="fa-regular fa-circle goal-uncheck"></i>
+                    </div>
+
+                    <div class="goal-item">
+                        <div class="goal-icon blue-goal"><i class="fa-solid fa-brain"></i></div>
+                        <div class="goal-info">
+                            <h4>Revise Concepts</h4>
+                            <p>Stay consistent</p>
+                        </div>
+                        <i class="fa-regular fa-circle goal-uncheck"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 TaskFlow. Designed for students, built for success.</p>
+            <p>Made with <span class="heart">♥</span> for productivity.</p>
+        </footer>
+
+    </main>
+</div>
+
+<div class="modal-overlay" id="taskModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2>Create New Task</h2>
+                <p>Add something to your to-do list.</p>
+            </div>
+            <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <form id="taskForm">
+            <label>Task Title</label>
+            <input type="text" id="taskTitle" placeholder="e.g. Complete Python Assignment" required>
+            <label>Subject / Category</label>
+            <select id="taskCategory">
+                <option>Programming</option>
+                <option>Mathematics</option>
+                <option>Science</option>
+                <option>Project</option>
+                <option>Personal</option>
+            </select>
+
+            <label>Due Date</label>
+            <input type="date" id="taskDate" required>
+
+            <label>Priority</label>
+            <select id="taskPriority">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <button type="submit" class="primary-btn submit-btn">Create Task <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+    </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
